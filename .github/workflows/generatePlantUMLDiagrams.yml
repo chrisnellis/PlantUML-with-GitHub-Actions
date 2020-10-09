@@ -25,7 +25,7 @@ jobs:
           args: 'diagrams/*.puml -o output/'
 
     - name: Check output
-      run: ls; ls output
+      run: ls; ls diagrams
 
     - name: Commit & Push Changes
       run: |

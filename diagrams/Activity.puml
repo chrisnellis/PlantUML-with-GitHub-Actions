@@ -1,0 +1,14 @@
+@startuml
+start
+repeat
+if (Are you happy?) then (Yes)
+    if (Do you know it?) then (Yes)
+        :Clap your hands;
+        stop
+    else (No)
+        :Attempt to recognize happiness;
+    endif
+else (No)
+    :Attempt to be happy;
+endif
+@enduml

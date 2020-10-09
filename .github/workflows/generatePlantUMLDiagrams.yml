@@ -1,0 +1,34 @@
+# This is a GitHub Workflow configuration
+# Sytnax reference: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: Plant UML Diagram Generator
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    #    Check to make sure the commit doesn't contain "ci-skip"
+    if: "!contains(github.event.head_commit.message, 'ci-skip')"
+    
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+      
+    - name: PlantUML Action
+      uses: Timmy/plantuml-action@v1
+      with:
+          args: 'diagrams/*.puml -o output/'
+
+    - name: Commit & Push Changes
+      run: |
+        if [[ `git status --porcelain` ]]; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add output/
+            git commit -am "[ci-skip] Push changes"
+            git push
+        fi

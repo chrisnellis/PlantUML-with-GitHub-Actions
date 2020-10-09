@@ -21,11 +21,8 @@ jobs:
     - name: Generate PlantUML Diagrams
       uses: Timmy/plantuml-action@v1
       with:
-          # These arguments go directly to the `plantuml` command. Reference: https://plantuml.com/command-line
-          args: 'diagrams/*.puml -o output/'
-
-    - name: Check output
-      run: ls; ls diagrams
+          # These arguments go directly to the `plantuml` command. Output directory is relative to input. Reference: https://plantuml.com/command-line
+          args: 'diagrams/*.puml -o ../output/'
 
     - name: Commit & Push Changes
       run: |
